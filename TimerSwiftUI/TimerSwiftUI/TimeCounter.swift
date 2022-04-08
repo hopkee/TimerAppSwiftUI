@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine // помогает реализовать архитектуру MVVM
+import SwiftUI
 
 class TimeCounter: ObservableObject {
     
@@ -17,6 +18,7 @@ class TimeCounter: ObservableObject {
     var counter = 3
     var timer: Timer?
     var buttonTitle = "Start"
+    var buttonColor = Color.green
     
     func startTimer() {
         if counter > 0 {
@@ -38,6 +40,7 @@ class TimeCounter: ObservableObject {
         } else {
             killTimer()
             buttonTitle = "Reset"
+            buttonColor = Color.red
         }
         
         objectWillChange.send(self) // отправим подписчикам обновление своего состояния
@@ -52,8 +55,10 @@ class TimeCounter: ObservableObject {
         if buttonTitle == "Reset" {
             counter = 3
             buttonTitle = "Start"
+            buttonColor = Color.green
         } else {
             buttonTitle = "Wait..."
+            buttonColor = Color.yellow
         }
         
         objectWillChange.send(self)

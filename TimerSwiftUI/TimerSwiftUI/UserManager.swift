@@ -6,12 +6,17 @@
 //
 
 import Combine
+import Foundation
+import SwiftUI
 
 class UserManager: ObservableObject {
-    @Published var isRegister = false
-    // A type that publishes a property marked with an attribute.
-    // Тип, который публикует свойство, помеченное атрибутом.
-    // Публикация свойства с атрибутом @Published создает издателя этого типа.
-    // Вы получаете доступ к издателю с помощью оператора $
-    var name = ""
+    
+    @AppStorage("userRegistered") var isRegister = false
+    @AppStorage("username") var name: String = ""
+
+    
+    static func deleteUser() {
+        UserDefaults.standard.removeObject(forKey: "userRegistered")
+    }
+    
 }
